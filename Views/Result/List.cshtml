@@ -1,0 +1,40 @@
+﻿
+@{
+    var Perfil = ViewBag.Perfil;
+    string Erro = ViewBag.Erro;
+
+    if (Erro.Length.Equals(0))
+    {
+        
+        <div class="margin-default">
+            <h2>@Perfil.GetSummonerContract().Name - Nível @Perfil.GetSummonerContract().SummonerLevel</h2>
+            <table class="table">
+                <thead class="thead-light">
+                    <tr>
+                        <th scope="col">Região</th>
+                        <th scope="col">Tipo de Ranqueada</th>
+                        <th scope="col">Elo<th>
+                        <th scope="col">Pontos de liga</th>
+                        <th scope="col">Vitórias</th>
+                        <th scope="col">Derrotas</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>@Perfil.GetRegiao()</td>
+                        <td>@Perfil.GetLigaContract().QueueType</td>
+                        <td>@Perfil.GetLigaContract().Tier @Perfil.GetLigaContract().Rank</td>
+                        <td>@Perfil.GetLigaContract().LeaguePoints</td>
+                        <td>@Perfil.GetLigaContract().Wins</td>
+                        <td>@Perfil.GetLigaContract().Losses</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
+    }
+    else
+    {
+        <h2>Erro, nenhuma partida encontrada para o usuário informado</h2>
+    }
+}
