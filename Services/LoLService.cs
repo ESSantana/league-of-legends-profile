@@ -44,7 +44,7 @@ namespace LoLStats.Services
             QueryLiga += $"{urlBase}/lol/league/v4/entries/by-summoner/{_perfilContract.GetSummonerContract().Id}{key}";
             _perfilContract.SetLigaContract(await GetLigaAsync(QueryLiga));
 
-
+            _perfilContract.GetLigaContract().QueueType = _perfilContract.GetLigaContract().QueueType.Replace("_", " ");
 
             _context.Perfil.Add(PrepararObj(_perfilContract));
             _context.SaveChanges();
