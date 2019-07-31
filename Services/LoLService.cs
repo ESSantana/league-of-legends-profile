@@ -1,28 +1,28 @@
-﻿using System.Collections.Generic;
-using System.Threading.Tasks;
+﻿using LoLStats.Controllers.model;
 using LoLStats.Models;
-using System.Net.Http;
-using LoLStats.Controllers.model;
-using System.Net.Http.Headers;
 using LoLStats.Repository;
-using System.Data.SqlClient;
+using System.Collections.Generic;
+using System.Net.Http;
+using System.Net.Http.Headers;
+using System.Threading.Tasks;
+using System.Configuration;
 
 namespace LoLStats.Services
 {
-    public class LoLService : ILoLService
+    public class LoLService
     {
         //Dados imutaveis de chamada da api
         private const string urlBase = "api.riotgames.com";
-        private const string key = "?api_key=RGAPI-6d33117e-c18d-475a-b494-be4dcb517b5e";
+        private const string key = "?api_key=RGAPI-f6b62fef-f54d-4e95-a89d-e000b30d4fdb";
 
         private readonly LoLStatsContext _context;
-        private Perfil _perfil;
+        private readonly Perfil _perfil;
         private SummonerContract _summonerContract;
         private LigaContract _ligaContract;
-        private PerfilContract _perfilContract;
+        private readonly PerfilContract _perfilContract;
         private Unranked _unranked;
 
-        public LoLService(SummonerContract summonerContract, PerfilContract perfilContract, 
+        public LoLService(SummonerContract summonerContract, PerfilContract perfilContract,
             LigaContract ligaContract, LoLStatsContext context, Perfil perfil)
         {
             _perfil = perfil;
@@ -32,7 +32,7 @@ namespace LoLStats.Services
             _perfilContract = perfilContract;
         }
 
-        
+
         public async Task<PerfilContract> GetProfileAsync(string Summoner, int Region)
         {
 
@@ -56,8 +56,10 @@ namespace LoLStats.Services
         {
             string[] RegiaoShort = { "br1.", "na1.", "eun1.", "jp1.", "kr.", "oc1." };
             string[] RegiaoFull = { "Brasil", "America do Norte", "Europa", "Japão", "Coreia", "Oceania" };
+
             _perfilContract.SetRegiao(RegiaoFull[Region - 1]);
-            return RegiaoShort[Region-1];
+
+            return RegiaoShort[Region - 1];
         }
 
         public async Task<SummonerContract> GetSummonerAsync(string Summoner)
@@ -80,10 +82,11 @@ namespace LoLStats.Services
 
         public async Task<LigaContract> GetLigaAsync(string Liga)
         {
-            using (HttpClient HttpClient = new HttpClient()) {
+            using (HttpClient HttpClient = new HttpClient())
+            {
                 HttpClient.DefaultRequestHeaders.Accept.Clear();
                 HttpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-            
+
                 HttpResponseMessage response = await HttpClient.GetAsync(Liga);
                 if (response.IsSuccessStatusCode)
                 {
@@ -98,7 +101,7 @@ namespace LoLStats.Services
                             _perfilContract.GetSummonerContract().Name);
                         _ligaContract = _unranked;
                     }
-                
+
                 }
             }
             return _ligaContract;
@@ -116,16 +119,8 @@ namespace LoLStats.Services
             _perfil.Losses = entity.GetLigaContract().Losses;
             _perfil.Regiao = entity.GetRegiao();
 
-
             return _perfil;
         }
 
-    }
-    public interface ILoLService
-    {
-        Task<PerfilContract> GetProfileAsync(string Summoner, int Region);
-        string GetRegion(int Region);
-        Task<SummonerContract> GetSummonerAsync(string Summoner);
-        Task<LigaContract> GetLigaAsync(string Liga);
     }
 }

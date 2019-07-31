@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\DipperInside\\Desktop\\LoLStats\\LoLStats\\LoLStats.csproj": {}
+    "C:\\Users\\DipperInside\\Documents\\Programação\\CSharp\\LoLProfile\\LoLStats.csproj": {}
   },
   "projects": {
-    "C:\\Users\\DipperInside\\Desktop\\LoLStats\\LoLStats\\LoLStats.csproj": {
+    "C:\\Users\\DipperInside\\Documents\\Programação\\CSharp\\LoLProfile\\LoLStats.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\DipperInside\\Desktop\\LoLStats\\LoLStats\\LoLStats.csproj",
+        "projectUniqueName": "C:\\Users\\DipperInside\\Documents\\Programação\\CSharp\\LoLProfile\\LoLStats.csproj",
         "projectName": "LoLStats",
-        "projectPath": "C:\\Users\\DipperInside\\Desktop\\LoLStats\\LoLStats\\LoLStats.csproj",
+        "projectPath": "C:\\Users\\DipperInside\\Documents\\Programação\\CSharp\\LoLProfile\\LoLStats.csproj",
         "packagesPath": "C:\\Users\\DipperInside\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\DipperInside\\Desktop\\LoLStats\\LoLStats\\obj\\",
+        "outputPath": "C:\\Users\\DipperInside\\Documents\\Programação\\CSharp\\LoLProfile\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"

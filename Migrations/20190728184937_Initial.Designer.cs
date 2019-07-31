@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LoLStats.Migrations
 {
     [DbContext(typeof(LoLStatsContext))]
-    [Migration("20190726222634_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20190728184937_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -22,8 +22,13 @@ namespace LoLStats.Migrations
 
             modelBuilder.Entity("LoLStats.Models.Perfil", b =>
                 {
-                    b.Property<string>("AccountId")
+                    b.Property<int>("id")
                         .ValueGeneratedOnAdd()
+                        .HasColumnName("id")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("AccountId")
+                        .IsRequired()
                         .HasColumnName("perfil_id")
                         .HasColumnType("nvarchar(100)");
 
@@ -46,6 +51,10 @@ namespace LoLStats.Migrations
                         .HasColumnName("divisao")
                         .HasColumnType("nvarchar(4)");
 
+                    b.Property<string>("Regiao")
+                        .HasColumnName("regiao")
+                        .HasColumnType("nvarchar(30)");
+
                     b.Property<string>("Tier")
                         .HasColumnName("elo")
                         .HasColumnType("nvarchar(20)");
@@ -53,7 +62,7 @@ namespace LoLStats.Migrations
                     b.Property<int>("Wins")
                         .HasColumnName("vitorias");
 
-                    b.HasKey("AccountId");
+                    b.HasKey("id");
 
                     b.ToTable("perfil");
                 });

@@ -25,6 +25,6 @@ namespace LoLStats.Controllers.model
 
         [DataMember(Name = "accountId")]
         public string AccountId { get; set; }
- 
     }
+
 }

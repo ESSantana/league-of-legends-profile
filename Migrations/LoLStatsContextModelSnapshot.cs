@@ -20,10 +20,15 @@ namespace LoLStats.Migrations
 
             modelBuilder.Entity("LoLStats.Models.Perfil", b =>
                 {
-                    b.Property<string>("AccountId")
+                    b.Property<int>("id")
                         .ValueGeneratedOnAdd()
+                        .HasColumnName("id")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("AccountId")
+                        .IsRequired()
                         .HasColumnName("perfil_id")
-                        .HasColumnType("nvarchar(100)");
+                        .HasColumnType("nvarchar(150)");
 
                     b.Property<int>("LeaguePoints")
                         .HasColumnName("pontos_liga");
@@ -34,19 +39,18 @@ namespace LoLStats.Migrations
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnName("nome")
-                        .HasColumnType("nvarchar(25)");
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("QueueType")
                         .HasColumnName("fila_ranqueada")
-                        .HasColumnType("nvarchar(25)");
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("Rank")
                         .HasColumnName("divisao")
-                        .HasColumnType("nvarchar(4)");
+                        .HasColumnType("nvarchar(20)");
 
                     b.Property<string>("Regiao")
-                        .HasColumnName("regiao")
-                        .HasColumnType("nvarchar(30)");
+                        .HasColumnName("regiao");
 
                     b.Property<string>("Tier")
                         .HasColumnName("elo")
@@ -55,7 +59,7 @@ namespace LoLStats.Migrations
                     b.Property<int>("Wins")
                         .HasColumnName("vitorias");
 
-                    b.HasKey("AccountId");
+                    b.HasKey("id");
 
                     b.ToTable("perfil");
                 });

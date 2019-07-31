@@ -13,13 +13,11 @@ namespace LoLStats.Repository
 {
     public class LoLStatsContext : DbContext
     {
+        public DbSet<Perfil> Perfil { get; set; }
 
         public LoLStatsContext(DbContextOptions<LoLStatsContext> options) : base(options)
         {
 
         }
-
-
-        public DbSet<Perfil> Perfil { get; set; }
     }
 }

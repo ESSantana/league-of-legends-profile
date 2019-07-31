@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace LoLStats.Controllers.model
 {
     [DataContract]
-    public class PerfilContract :IPerfilContract
+    public class PerfilContract
     {
         [DataMember]
         private LigaContract LigaContract;
@@ -33,11 +33,6 @@ namespace LoLStats.Controllers.model
             return this.SummonerContract;
         }
 
-        LigaContract IPerfilContract.LigaContract()
-        {
-            throw new NotImplementedException();
-        }
-
         [DataMember]
         private string Regiao;
 
@@ -50,14 +45,5 @@ namespace LoLStats.Controllers.model
         {
             return this.Regiao;
         }
-    }
-
-    public interface IPerfilContract
-    {
-        void SetSummonerContract(SummonerContract s);
-        SummonerContract GetSummonerContract();
-
-        void SetLigaContract(LigaContract l);
-        LigaContract LigaContract();
     }
 }

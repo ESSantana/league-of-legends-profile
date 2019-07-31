@@ -49,4 +49,5 @@ namespace LoLStats.Controllers.model
         public int LeaguePoints { get; set; }
 
     }
+
 }
