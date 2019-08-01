@@ -6,6 +6,7 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using System.Configuration;
+using System;
 
 namespace LoLStats.Services
 {
@@ -13,7 +14,7 @@ namespace LoLStats.Services
     {
         //Dados imutaveis de chamada da api
         private const string urlBase = "api.riotgames.com";
-        private const string key = "?api_key=RGAPI-f6b62fef-f54d-4e95-a89d-e000b30d4fdb";
+        private string key = $"?api_key={Environment.GetEnvironmentVariable("LOL_API")}";
 
         private readonly LoLStatsContext _context;
         private readonly Perfil _perfil;
@@ -52,15 +53,6 @@ namespace LoLStats.Services
             return _perfilContract;
         }
 
-        public string GetRegion(int Region)
-        {
-            string[] RegiaoShort = { "br1.", "na1.", "eun1.", "jp1.", "kr.", "oc1." };
-            string[] RegiaoFull = { "Brasil", "America do Norte", "Europa", "Japão", "Coreia", "Oceania" };
-
-            _perfilContract.SetRegiao(RegiaoFull[Region - 1]);
-
-            return RegiaoShort[Region - 1];
-        }
 
         public async Task<SummonerContract> GetSummonerAsync(string Summoner)
         {
@@ -105,6 +97,15 @@ namespace LoLStats.Services
                 }
             }
             return _ligaContract;
+        }
+        public string GetRegion(int Region)
+        {
+            string[] RegiaoShort = { "br1.", "na1.", "eun1.", "jp1.", "kr.", "oc1." };
+            string[] RegiaoFull = { "Brasil", "America do Norte", "Europa", "Japão", "Coreia", "Oceania" };
+
+            _perfilContract.SetRegiao(RegiaoFull[Region - 1]);
+
+            return RegiaoShort[Region - 1];
         }
 
         private Perfil PrepararObj(PerfilContract entity)
